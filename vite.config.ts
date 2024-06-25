@@ -3,27 +3,39 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/",
   build: {
     sourcemap: true,
     assetsDir: "code",
-    target: ["esnext"],
-    cssMinify: true,
-    lib: false
   },
   plugins: [
     VitePWA({
-      strategies: "injectManifest",
-      injectManifest: {
-        swSrc: 'public/sw.js',
-        swDest: 'dist/sw.js',
+      // you can remove base and scope pwa plugin will use the base on vite: defaults to /
+      base: "/",
+      scope: "/",
+      registerType: "autoUpdate",
+      manifest: false,
+      workbox: {
         globDirectory: 'dist',
         globPatterns: [
-          '**/*.{html,js,css,json,png}',
+          '**/*.{html,js,css,png,webp,jpg}'
         ],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/unpkg\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'unpkg-libs-cache',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          }
+        ]
       },
-      injectRegister: false,
-      manifest: false,
       devOptions: {
         enabled: true
       }

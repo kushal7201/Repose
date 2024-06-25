@@ -1,32 +1,29 @@
 {
-  "name": "pwa-starter",
+  "name": "repose",
   "version": "0.0.1",
-  "description": "A starter kit for building PWAs!",
+  "description": "A mood tracker and daily journal app",
   "main": "index.js",
   "scripts": {
-    "dev-server": "vite --open",
-    "dev": "npm run dev-server",
-    "dev-task": "vite",
-    "deploy": "npx @azure/static-web-apps-cli login --no-use-keychain && npx @azure/static-web-apps-cli deploy",
+    "dev": "vite",
     "build": "tsc && vite build",
-    "start": "npm run dev",
+    "start": "npm run build && vite preview",
     "start-remote": "vite --host"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@shoelace-style/shoelace": "^2.15.0",
-    "@thepassle/app-tools": "^0.9.12",
-    "lit": "^3.1.2",
-    "urlpattern-polyfill": "^10.0.0",
-    "workbox-build": "^7.0.0",
-    "workbox-core": "^7.0.0",
-    "workbox-precaching": "^7.0.0"
+    "@pwabuilder/pwainstall": "^1.6.7",
+    "@vaadin/router": "^1.7.4",
+    "lit": "^2.2.1",
+    "workbox-build": "^6.5.2",
+    "workbox-core": "^6.5.2",
+    "workbox-precaching": "^6.5.2"
   },
   "devDependencies": {
-    "typescript": "^5.4.4",
-    "vite": "^5.2.8",
-    "vite-plugin-pwa": "^0.19.8"
+    "typescript": "^4.6.3",
+    "vite": "^2.9.1",
+    "vite-plugin-pwa": "^0.11.13",
+    "localforage": "^1.10.0"
   },
   "prettier": {
     "tabWidth": 2,
